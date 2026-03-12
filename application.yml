@@ -1,0 +1,11 @@
+jwt:
+  secret: bankSecretKeyBankSecretKeyBankSecretKeyBankSecretKey
+  expirationMs: 86400000
+
+internal:
+  token: INTERNAL_SECRET_TOKEN
+
+spring:
+  datasource:
+    username: root
+    password: root
