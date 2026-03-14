@@ -41,7 +41,3 @@ jwt:
   refreshExpirationMs: 86400000
   token-prefix: Bearer
   header: Authorization
-
-spring:
-  profiles:
-    include: kafka-common
