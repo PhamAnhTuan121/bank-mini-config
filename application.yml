@@ -1,11 +1,47 @@
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 5
+
+  client:
+    fetch-registry: true
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 3000
+        loggerLevel: FULL
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      default:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+
+  timelimiter:
+    instances:
+      default:
+        timeoutDuration: 3s
+
+  retry:
+    instances:
+      default:
+        waitDuration: 200ms
+
 jwt:
   secret: YlZ2JkU3pVZ0ZkY0pNd1BqZV9rTXdkdkpTTUVnQ2Y1U1VLMU1uUWtJQ1pKd1EySzN4dnFVR0Zz
   expirationMs: 3600000
-
-internal:
-  token: INTERNAL_SECRET_TOKEN
+  refreshExpirationMs: 86400000
+  token-prefix: Bearer
+  header: Authorization
 
 spring:
-  datasource:
-    username: root
-    password: root
+  kafka:
+    bootstrap-servers: localhost:29092
