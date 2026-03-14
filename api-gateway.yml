@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+
+            - id: auth-service
+              uri: lb://AUTH-SERVICE
+              predicates:
+                - Path=/api/v1/auth/**,/api/v1/internal/users/**
+
+            - id: account-service
+              uri: lb://ACCOUNT-SERVICE
+              predicates:
+                - Path=/api/v1/accounts/**,/api/v1/admin/accounts/**,/api/v1/employee/accounts/**,/api/v1/internal/accounts/**
+
+            - id: transaction-service
+              uri: lb://TRANSACTION-SERVICE
+              predicates:
+                - Path=/api/v1/transactions/**,/transfers/**
+
+            - id: notification-service
+              uri: lb://NOTIFICATION-SERVICE
+              predicates:
+                - Path=/api/v1/notifications/**
+
+            - id: user-service
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/api/v1/users/**
+
+            - id: customer-service
+              uri: lb://CUSTOMER-SERVICE
+              predicates:
+                - Path=/api/v1/customers/**,/internal/customers/**
+
+            - id: otp-service
+              uri: lb://OTP-SERVICE
+              predicates:
+                - Path=/otp/**
