@@ -15,9 +15,3 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
-  kafka:
-    bootstrap-servers: localhost:9092
-    consumer:
-      group-id: audit-log-group
-      auto-offset-reset: earliest
