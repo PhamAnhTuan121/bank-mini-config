@@ -43,5 +43,5 @@ jwt:
   header: Authorization
 
 spring:
-  kafka:
-    bootstrap-servers: localhost:29092
+  profiles:
+    include: kafka-common
