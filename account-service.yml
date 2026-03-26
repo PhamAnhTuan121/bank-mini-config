@@ -19,16 +19,6 @@ spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
 
-  kafka:
-    consumer:
-      group-id: account-service-group
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring.json.value.default.type: com.bank.bank_common.dto.auth.UserActivatedEvent
-        spring.json.trusted.packages: "*"
-
 springdoc:
   swagger-ui:
     path: /swagger-ui
