@@ -19,19 +19,6 @@ spring:
       hibernate:
         format_sql: true
 
-  kafka:
-    consumer:
-      group-id: customer-service-group
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring.json.value.default.type: com.bank.bank_common.dto.auth.UserActivatedEvent
-        spring.json.trusted.packages: "*"
-
-  jackson:
-    property-naming-strategy: SNAKE_CASE
-
 customer:
   default:
     daily-limit: 10000000
