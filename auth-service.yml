@@ -21,6 +21,10 @@ logging:
   level:
     org.springframework.security: DEBUG
     
+kafka:
+    consumer:
+      group-id: auth-service-group
+      
 internal:
   header: X-Internal-Token
   secret: bank-internal-secret
