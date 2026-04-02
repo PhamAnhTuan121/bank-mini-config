@@ -21,7 +21,7 @@ spring:
             - id: transaction-service
               uri: lb://TRANSACTION-SERVICE
               predicates:
-                - Path=/api/v1/internal/transactions/**, /transactions/** , /api/v1/admin/transactions/**
+                - Path=/api/v1/internal/transactions/**, /api/v1/user/transactions/** , /api/v1/admin/transactions/**
 
             - id: notification-service
               uri: lb://NOTIFICATION-SERVICE
