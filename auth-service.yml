@@ -28,3 +28,9 @@ kafka:
 internal:
   header: X-Internal-Token
   secret: bank-internal-secret
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
