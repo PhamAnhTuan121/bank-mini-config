@@ -11,7 +11,10 @@ spring:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
       mail.smtp.starttls.required: true
-
+  kafka:
+    consumer:
+      group-id: notification-group-v3
+      
 management:
   endpoints:
     web:
