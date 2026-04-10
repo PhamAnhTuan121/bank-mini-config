@@ -12,7 +12,8 @@ spring:
       ddl-auto: update
     show-sql: true
 
-  kafka:
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
