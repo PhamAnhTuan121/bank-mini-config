@@ -1,12 +1,12 @@
 server:
   port: 8081
-  
+
 jwt:
   secret: YlZ2JkU3pVZ0ZkY0pNd1BqZV9rTXdkdkpTTUVnQ2Y1U1VLMU1uUWtJQ1pKd1EySzN4dnFVR0Zz
-  
+
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/auth_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    url: jdbc:mysql://mysql:3306/auth_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -16,15 +16,28 @@ spring:
       ddl-auto: update
     show-sql: true
 
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: auth-service-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+
+  config:
+    import: optional:configserver:http://config-server:8888
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
 
 logging:
   level:
     org.springframework.security: DEBUG
-    
-kafka:
-    consumer:
-      group-id: auth-service-group
-      
+
 internal:
   header: X-Internal-Token
   secret: bank-internal-secret
@@ -33,4 +46,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: prometheus
+        include: health,info,prometheus
