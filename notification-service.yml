@@ -5,14 +5,15 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: tuanpaph35819@fpt.edu.vn
-    password: zrzd olmd jvzq obwh
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
       mail.smtp.starttls.required: true
-      
+
   kafka:
+    bootstrap-servers: kafka:9092   # ✅ QUAN TRỌNG
     consumer:
       group-id: notification-group-v3
       auto-offset-reset: earliest
@@ -23,9 +24,17 @@ spring:
         spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
         spring.json.trusted.packages: "com.bank.bank_common.dto.notification.request"
         spring.json.value.default.type: com.bank.bank_common.dto.notification.request.NotificationRequest
-      
+
+  config:
+    import: optional:configserver:http://config-server:8888
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+
 management:
   endpoints:
     web:
       exposure:
-        include: prometheus
+        include: health,info,prometheus
