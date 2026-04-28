@@ -1,9 +1,6 @@
 server:
   port: 8086
 
-jwt:
-  secret: YlZ2JkU3pVZ0ZkY0pNd1BqZV9rTXdkdkpTTUVnQ2Y1U1VLMU1uUWtJQ1pKd1EySzN4dnFVR0Zz
-
 spring:
   datasource:
     url: jdbc:mysql://mysql:3306/customer_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
@@ -13,26 +10,33 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update   # 👉 nên dùng update khi chạy docker lần đầu
+      ddl-auto: update
     show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
 
-  config:
-    import: optional:configserver:http://config-server:8888
+  kafka:
+    bootstrap-servers: kafka:9092
 
 eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 5
+    prefer-ip-address: true
+
   client:
+    fetch-registry: true
+    registry-fetch-interval-seconds: 5
     service-url:
       defaultZone: http://eureka-server:8761/eureka
-
-customer:
-  default:
-    daily-limit: 10000000
 
 management:
   endpoints:
     web:
       exposure:
         include: health,info,prometheus
+
+customer:
+  default:
+    daily-limit: 10000000
+
+jwt:
+  secret: your_secret
+  expirationMs: 3600000
