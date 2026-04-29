@@ -3,19 +3,41 @@ spring:
     name: account-service
 
   datasource:
-    url: jdbc:mysql://mysql:3306/account_db?createDatabaseIfNotExist=true
+    url: jdbc:mysql://mysql:3306/account_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: 123456
 
   jpa:
     hibernate:
       ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
   kafka:
     bootstrap-servers: kafka:9092
+    consumer:
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: true
 
 eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 5
+    prefer-ip-address: true
+
   client:
+    fetch-registry: true
+    registry-fetch-interval-seconds: 5
     service-url:
       defaultZone: http://eureka-server:8761/eureka
 
@@ -25,6 +47,51 @@ management:
       exposure:
         include: health,info,prometheus
 
+  endpoint:
+    prometheus:
+      enabled: true
+
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
 jwt:
   secret: YlZ2JkU3pVZ0ZkY0pNd1BqZV9rTXdkdkpTTUVnQ2Y1U1VLMU1uUWtJQ1pKd1EySzN4dnFVR0Zz
   expirationMs: 3600000
+  refreshExpirationMs: 86400000
+  token-prefix: Bearer
+  header: Authorization
+
+internal:
+  header: X-Internal-Token
+  secret: bank-internal-secret
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 3000
+        loggerLevel: FULL
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      default:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+
+  timelimiter:
+    instances:
+      default:
+        timeoutDuration: 3s
+
+  retry:
+    instances:
+      default:
+        waitDuration: 200ms
+
+logstash:
+  host: logstash
