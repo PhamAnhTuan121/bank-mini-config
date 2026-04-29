@@ -1,39 +1,30 @@
-server:
-  port: 8082
-
-jwt:
-  secret: YlZ2JkU3pVZ0ZkY0pNd1BqZV9rTXdkdkpTTUVnQ2Y1U1VLMU1uUWtJQ1pKd1EySzN4dnFVR0Zz
-
 spring:
+  application:
+    name: account-service
+
   datasource:
-    url: jdbc:mysql://mysql:3306/account_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    url: jdbc:mysql://mysql:3306/account_db?createDatabaseIfNotExist=true
     username: root
     password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
-      ddl-auto: update   # 👉 nên dùng update khi docker lần đầu
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+      ddl-auto: update
 
-  jackson:
-    property-naming-strategy: SNAKE_CASE
+  kafka:
+    bootstrap-servers: kafka:9092
 
-  config:
-    import: optional:configserver:http://config-server:8888
-
-springdoc:
-  swagger-ui:
-    path: /swagger-ui
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
 
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics,prometheus
-  endpoint:
-    health:
-      show-details: always
+        include: health,info,prometheus
+
+jwt:
+  secret: YlZ2JkU3pVZ0ZkY0pNd1BqZV9rTXdkdkpTTUVnQ2Y1U1VLMU1uUWtJQ1pKd1EySzN4dnFVR0Zz
+  expirationMs: 3600000
