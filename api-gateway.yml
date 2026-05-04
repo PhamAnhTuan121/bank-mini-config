@@ -42,3 +42,6 @@ spring:
               uri: lb://OTP-SERVICE
               predicates:
                 - Path=/otp/**
+logging:
+level:
+  org.springframework.cloud.gateway: DEBUG
