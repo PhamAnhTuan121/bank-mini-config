@@ -43,5 +43,8 @@ spring:
               predicates:
                 - Path=/otp/**
 logging:
-level:
-  org.springframework.cloud.gateway: DEBUG
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.netty: DEBUG
