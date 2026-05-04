@@ -1,6 +1,5 @@
-spring:
-  application:
-    name: account-service
+server:
+  port: 8083
 
   datasource:
     url: jdbc:mysql://mysql:3306/account_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
