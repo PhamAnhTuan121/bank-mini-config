@@ -16,7 +16,7 @@ spring:
       hibernate:
         format_sql: true
 
-   kafka:
+  kafka:
     bootstrap-servers: kafka:9092
 
     consumer:
