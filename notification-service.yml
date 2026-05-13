@@ -18,19 +18,22 @@ spring:
     consumer:
       group-id: notification-group-v3
       auto-offset-reset: earliest
-
-      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
-
-      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
-
+    
+      key-deserializer:
+        org.apache.kafka.common.serialization.StringDeserializer
+    
+      value-deserializer:
+        org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+    
       properties:
-        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
-
-        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
-
-        spring.json.trusted.packages: "com.bank.bank_common.dto.event"
-
-        spring.json.value.default.type: com.bank.bank_common.dto.event.TransactionSuccessEvent
+        spring.deserializer.value.delegate.class:
+          org.springframework.kafka.support.serializer.JsonDeserializer
+    
+        spring.json.trusted.packages:
+          com.bank.bank_common.dto.event
+    
+        spring.json.value.default.type:
+          com.bank.bank_common.dto.event.TransactionSuccessEvent
 
 eureka:
   client:
