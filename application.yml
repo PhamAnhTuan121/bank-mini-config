@@ -1,77 +1,77 @@
-# eureka:
-#   instance:
-#     lease-renewal-interval-in-seconds: 5
-#     prefer-ip-address: true
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 5
+    prefer-ip-address: true
 
-#   client:
-#     fetch-registry: true
-#     registry-fetch-interval-seconds: 5
-#     service-url:
-#       defaultZone: http://eureka-server:8761/eureka
+  client:
+    fetch-registry: true
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
 
-# feign:
-#   client:
-#     config:
-#       default:
-#         connectTimeout: 2000
-#         readTimeout: 3000
-#         loggerLevel: FULL
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 3000
+        loggerLevel: FULL
 
-# resilience4j:
-#   circuitbreaker:
-#     instances:
-#       default:
-#         slidingWindowSize: 10
-#         failureRateThreshold: 50
-#         waitDurationInOpenState: 5s
-#         permittedNumberOfCallsInHalfOpenState: 3
+resilience4j:
+  circuitbreaker:
+    instances:
+      default:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
 
-#   timelimiter:
-#     instances:
-#       default:
-#         timeoutDuration: 3s
+  timelimiter:
+    instances:
+      default:
+        timeoutDuration: 3s
 
-#   retry:
-#     instances:
-#       default:
-#         waitDuration: 200ms
+  retry:
+    instances:
+      default:
+        waitDuration: 200ms
 
-# jwt:
-#   secret: YlZ2JkU3pVZ0ZkY0pNd1BqZV9rTXdkdkpTTUVnQ2Y1U1VLMU1uUWtJQ1pKd1EySzN4dnFVR0Zz
-#   expirationMs: 3600000
-#   refreshExpirationMs: 86400000
-#   token-prefix: Bearer
-#   header: Authorization
+jwt:
+  secret: YlZ2JkU3pVZ0ZkY0pNd1BqZV9rTXdkdkpTTUVnQ2Y1U1VLMU1uUWtJQ1pKd1EySzN4dnFVR0Zz
+  expirationMs: 3600000
+  refreshExpirationMs: 86400000
+  token-prefix: Bearer
+  header: Authorization
 
-# internal:
-#   header: X-Internal-Token
-#   secret: bank-internal-secret
+internal:
+  header: X-Internal-Token
+  secret: bank-internal-secret
 
-# spring:
-#   kafka:
-#     bootstrap-servers: kafka:9092   # ✅ sửa ở đây
-#     consumer:
-#       auto-offset-reset: earliest
-#       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-#       properties:
-#         spring.json.trusted.packages: "*"
+spring:
+  kafka:
+    bootstrap-servers: kafka:9092   # ✅ sửa ở đây
+    consumer:
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
 
-#     producer:
-#       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-#       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-#       properties:
-#         spring.json.add.type.headers: true
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: true
 
-# management:
-#   endpoints:
-#     web:
-#       exposure:
-#         include: health,info,prometheus
-#   endpoint:
-#     prometheus:
-#       enabled: true
-#   prometheus:
-#     metrics:
-#       export:
-#         enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    prometheus:
+      enabled: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
