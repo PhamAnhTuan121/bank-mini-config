@@ -46,7 +46,7 @@ spring:
               - id: audit-log-service
               uri: lb://AUDIT-LOG-SERVICE
               predicates:
-                - Path=/api/v1/admin/**
+                - Path=/api/v1/admin/audit-logs/**
 logging:
   level:
     root: INFO
