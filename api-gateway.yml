@@ -42,6 +42,11 @@ spring:
               uri: lb://OTP-SERVICE
               predicates:
                 - Path=/otp/**
+                
+              - id: audit-log-service
+              uri: lb://AUDIT-LOG-SERVICE
+              predicates:
+                - Path=/api/v1/admin/**
 logging:
   level:
     root: INFO
