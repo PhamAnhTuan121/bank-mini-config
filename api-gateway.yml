@@ -43,7 +43,7 @@ spring:
               predicates:
                 - Path=/otp/**
                 
-              - id: audit-log-service
+            - id: audit-log-service
               uri: lb://AUDIT-LOG-SERVICE
               predicates:
                 - Path=/api/v1/admin/audit-logs/**
